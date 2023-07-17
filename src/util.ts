@@ -103,7 +103,7 @@ export default {
     }
   },
 
-  eventHasFile (evt) {
+  eventHasFile (evt: DragEvent) {
     var dt = evt.dataTransfer || evt.originalEvent.dataTransfer
     if (dt.types) {
       for (var i = 0, len = dt.types.length; i < len; i++) {
@@ -116,7 +116,7 @@ export default {
     return false
   },
 
-  getFileOrientation (arrayBuffer) {
+  getFileOrientation (arrayBuffer: ArrayBuffer) {
     var view = new DataView(arrayBuffer)
     if (view.getUint16(0, false) != 0xFFD8) return -2
     var length = view.byteLength
@@ -141,12 +141,12 @@ export default {
     return -1
   },
 
-  parseDataUrl (url) {
+  parseDataUrl (url: string) {
     const reg = /^data:([^;]+)?(;base64)?,(.*)/gmi
-    return reg.exec(url)[3]
+    return reg.exec(url)?.[3]
   },
 
-  base64ToArrayBuffer (base64) {
+  base64ToArrayBuffer (base64: string) {
     var binaryString = atob(base64)
     var len = binaryString.length
     var bytes = new Uint8Array(len)
@@ -156,14 +156,14 @@ export default {
     return bytes.buffer
   },
 
-  getRotatedImage (img, orientation) {
+  getRotatedImage (img: HTMLImageElement, orientation: number) {
     var _canvas = CanvasExifOrientation.drawImage(img, orientation)
     var _img = new Image()
     _img.src = _canvas.toDataURL()
     return _img
   },
 
-  flipX (ori) {
+  flipX (ori: number) {
     if (ori % 2 == 0) {
       return ori - 1
     }
@@ -171,8 +171,8 @@ export default {
     return ori + 1
   },
 
-  flipY (ori) {
-    const map = {
+  flipY (ori: number) {
+    const map: Record<number, number> = {
       1: 4,
       4: 1,
       2: 3,
@@ -186,8 +186,8 @@ export default {
     return map[ori]
   },
 
-  rotate90 (ori) {
-    const map = {
+  rotate90 (ori: number) {
+    const map: Record<number, number> = {
       1: 6,
       2: 7,
       3: 8,
@@ -201,7 +201,7 @@ export default {
     return map[ori]
   },
 
-  numberValid (n) {
+  numberValid (n: unknown): boolean {
     return typeof n === 'number' && !isNaN(n)
   }
 }

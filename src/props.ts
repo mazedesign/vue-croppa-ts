@@ -18,14 +18,14 @@ export default {
   width: {
     type: Number,
     default: 200,
-    validator: function (val) {
+    validator: function (val: number) {
       return val > 0
     }
   },
   height: {
     type: Number,
     default: 200,
-    validator: function (val) {
+    validator: function (val: number) {
       return val > 0
     }
   },
@@ -39,7 +39,7 @@ export default {
   placeholderFontSize: {
     type: Number,
     default: 0,
-    validator: function (val) {
+    validator: function (val: number) {
       return val >= 0
     }
   },
@@ -49,14 +49,14 @@ export default {
   quality: {
     type: Number,
     default: 2,
-    validator: function (val) {
+    validator: function (val: number) {
       return val > 0
     }
   },
   zoomSpeed: {
     default: 3,
     type: Number,
-    validator: function (val) {
+    validator: function (val: number) {
       return val > 0
     }
   },
@@ -64,7 +64,7 @@ export default {
   fileSizeLimit: {
     type: Number,
     default: 0,
-    validator: function (val) {
+    validator: function (val: number) {
       return val >= 0
     }
   },
@@ -92,14 +92,14 @@ export default {
   initialSize: {
     type: String,
     default: 'cover',
-    validator: function (val) {
+    validator: function (val: string) {
       return val === 'cover' || val === 'contain' || val === 'natural'
     }
   },
   initialPosition: {
     type: String,
     default: 'center',
-    validator: function (val) {
+    validator: function (val: string) {
       var valids = ['center', 'top', 'bottom', 'left', 'right']
       return (
         val.split(' ').every(word => {
